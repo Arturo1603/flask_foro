@@ -8,6 +8,13 @@ from config import config_env
 app = Flask(__name__)
 app.config.from_object(config_env[getenv('FLASK_ENV')])
 
-api = Api(app)
+api = Api(
+    app,
+    title='Foro Flask',
+    version='0.0.1',
+    description='Endpoints de nuestro Foro de soporte',
+    # doc=''
+)
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)

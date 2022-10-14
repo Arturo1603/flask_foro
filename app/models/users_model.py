@@ -1,5 +1,5 @@
 from app.models.base import BaseModel
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 
 class UserModel(BaseModel):
 
@@ -9,12 +9,12 @@ class UserModel(BaseModel):
     name = Column(String(120))
     last_name = Column(String(160))
     image_url = Column(String(128))
-    email = Column(String(120))
+    email = Column(String(120), unique=True)
 
     username = Column(String(80), unique=True)
     password = Column(String(120), nullable=False)
 
     status = Column(Boolean, default=True)
 
-    rol_id = Column(Integer, default=1)
+    rol_id = Column(Integer, ForeignKey('roles.id'),default=1)
 

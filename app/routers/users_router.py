@@ -1,5 +1,8 @@
 from app import api
+from flask import request
 from flask_restx import Resource
+from app.schemas.users_schema import UserRequestSchema
+from app.controllers.users_controller import UsersController
 
 namespace = api.namespace(
     name='Users',
@@ -7,31 +10,38 @@ namespace = api.namespace(
     path='/users'
 )
 
+request_schema = UserRequestSchema(namespace)
+
 
 @namespace.route('/')
 class Users(Resource):
     def get(self):
-        return {
-            "message": "Users list"
-        }
+        '''User list'''
+        controller = UsersController()
+        return controller.all()
 
+    @api.expect(request_schema.create(), validate=True)
     def post(self):
-        return {
-            "message": "User created"
-        }
+        '''User Created'''
+        controller = UsersController()
+        return controller.create(request.json)
 
 
 @namespace.route('/<int:id>')
 class UsersbydID(Resource):
+    def get(self, id):
+        controller = UsersController()
+        return controller.getById(id)
+
+    @api.expect(request_schema.update(), validate=True)
     def put(self, id):
-        return {
-            "message": f'updated id: {id}'
-        }
+        '''User Update'''
+        controller = UsersController()
+        return controller.update(id, request.json)
 
     def delete(self, id):
-        return {
-            "message": f'deleted id: {id}'
-        }
+        controller = UsersController()
+        return controller.delete(id)
 
 
 api.add_namespace(namespace)
