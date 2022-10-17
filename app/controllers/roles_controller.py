@@ -11,7 +11,7 @@ class RolesController:
     def search(self, id):
         return self.model.where(id=id).first()
 
-    def changeInDB(self, record):
+    def changeInDB(self, record=None):
         if record:
             db.session.add(record)
             db.session.commit()

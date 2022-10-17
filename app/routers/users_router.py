@@ -30,6 +30,7 @@ class Users(Resource):
 @namespace.route('/<int:id>')
 class UsersbydID(Resource):
     def get(self, id):
+        '''User By ID'''
         controller = UsersController()
         return controller.getById(id)
 
@@ -40,6 +41,7 @@ class UsersbydID(Resource):
         return controller.update(id, request.json)
 
     def delete(self, id):
+        '''User delete'''
         controller = UsersController()
         return controller.delete(id)
 

@@ -1,4 +1,4 @@
-import restx
+
 from app import app, db
 
 # importamos las rutas

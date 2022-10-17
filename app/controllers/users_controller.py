@@ -11,7 +11,7 @@ class UsersController:
     def search(self, id):
         return self.model.where(id=id).first()
 
-    def changeInDB(self, record):
+    def changeInDB(self, record=None):
         if record:
             db.session.add(record)
             db.session.commit()
@@ -39,14 +39,15 @@ class UsersController:
         try:
             #  usamos el metodo create y le mandamos la data, puede ser data['name] o
             # mas practico mandar la data como **data, asi le mandas independientemente com un sprind operator
-            new_record = self.model.create(**data)
-            self.changeInDB(new_record)
+            record = self.model.create(**data)
+            record.hashPassword()
+            self.changeInDB(record)
 
             return {
                 'message': 'User created susccesfully',
                 # dump serializa la data de json a string
                 # # false porque devolvemos un objeto
-                'data': self.response(many=False).dump(new_record)
+                'data': self.response(many=False).dump(record)
             }, 201
         except Exception as e:
             self.changeInDB()

@@ -1,5 +1,6 @@
 from flask_restx import fields
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+from marshmallow.fields import Nested
 from app.models.users_model import UserModel
 
 
@@ -18,7 +19,7 @@ class UserRequestSchema:
             'password': fields.String(required=True, max_length=120),
             'rol_id': fields.Integer(readonly=True, default=2)
         })
-    
+
     def update(self):
         return self.namespace.model('User Update', {
             'name': fields.String(required=False, max_length=50),
@@ -35,3 +36,6 @@ class UserResponseSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = UserModel
         ordered = True
+        exclude = ['password']
+
+    role = Nested('RolesResponseSchema', exclude=['users'], many=False)
