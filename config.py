@@ -7,6 +7,7 @@ class BaseConfig:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = getenv('JWT_SECRET')
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=1)
+    JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=2)
 
 
 class DevelopmentConfig(BaseConfig):

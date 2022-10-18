@@ -9,11 +9,20 @@ from flask_jwt_extended import JWTManager
 app = Flask(__name__)
 app.config.from_object(config_env[getenv('FLASK_ENV')])
 
+authorizations = {
+    'Bearer': {
+        'type': 'apiKey',
+        'in': 'header',
+        'name': 'Authorization'
+    }
+}
+
 api = Api(
     app,
     title='Foro Flask',
     version='0.0.1',
     description='Endpoints de nuestro Foro de soporte',
+    authorizations=authorizations,
     # doc=''
 )
 
