@@ -21,12 +21,20 @@ class UsersController:
 
 
 
-    def all(self):
+    def all(self, per_page, page):
         try:
-            records = self.model.where(status=True).order_by('id').all()
+            records = self.model.where(status=True).order_by('id').paginate(
+                per_page=per_page, page=page
+            )
             return {
                 'message': 'listado de roles',
-                'data': self.response(many=True).dump(records),
+                'data': self.response(many=True).dump(records.items),
+                'pagination':{
+                    'totalRecords':records.total,
+                    'perPage':records.per_page,
+                    'TotalPages':records.pages,
+                    'CurrentPage':records.page,
+                }
             }, 200
 
         except Exception as e:

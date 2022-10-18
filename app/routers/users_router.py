@@ -15,10 +15,13 @@ request_schema = UserRequestSchema(namespace)
 
 @namespace.route('/')
 class Users(Resource):
+
+    @namespace.expect(request_schema.all())
     def get(self):
         '''User list'''
+        query_params =  request_schema.all().parse_args()
         controller = UsersController()
-        return controller.all()
+        return controller.all( query_params['per_page'], query_params['page'])
 
     @api.expect(request_schema.create(), validate=True)
     def post(self):
