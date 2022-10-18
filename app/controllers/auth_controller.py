@@ -21,10 +21,24 @@ class AuthController:
                     return {
                         'acces_token': acces_token,
                         'refresh_token': refresh_token
-                    }
+                    }, 200
                 else:
                     raise Exception('Invalid password')
             raise Exception('The user does not exist')
+        except Exception as e:
+            return {
+                "message": "Ocurrio algo",
+                'error': str(e),
+            }, 500
+    
+    def refreshToken(self, identity):
+        try:
+            access_token=create_access_token(
+                identity=identity
+            )
+            return {
+                'access_token':access_token
+            }, 200
         except Exception as e:
             return {
                 "message": "Ocurrio algo",
