@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import config_env
 from flask_jwt_extended import JWTManager
+from flask_mail import Mail
 
 app = Flask(__name__)
 app.config.from_object(config_env[getenv('FLASK_ENV')])
@@ -30,3 +31,4 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 jwt = JWTManager(app)
+mail = Mail(app)

@@ -24,6 +24,15 @@ class SignIn(Resource):
         print(request.json)
         return controller.signIn(request.json)
 
+# reset passsword
+@namespace.route('/reset_password')
+class ResetPassword(Resource):
+    @namespace.expect(request_schema.resetPassword(), validate=True)
+    def post(self):
+        ''' Restear la contrasenia de un usuario '''
+        controller = AuthController()
+        return controller.resetPassword(request.json)
+
 @namespace.route('/token/refresh')
 class TokenRefresh(Resource):
 

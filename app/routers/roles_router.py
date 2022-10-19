@@ -17,13 +17,13 @@ request_schema = RolesRequestSchema(namespace)
 @namespace.route('/')
 class Roles(Resource):
 
-    @jwt_required()
+    # @jwt_required()
     def get(self):
         '''Roles List'''
         controller = RolesController()
         return controller.all()
 
-    @jwt_required()
+    # @jwt_required()
     @api.expect(request_schema.create(), validate=True)
     def post(self):
         ''' Roles Creation'''

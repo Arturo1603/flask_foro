@@ -13,3 +13,12 @@ DATABASE_URI='postgresql://postgres:root@localhost:5432/flask_foro'
 
 JWT_SECRET='Berserk'
 ```
+```python
+
+MAIL_SERVER='smtp.gmail.com'
+MAIL_PORT=587
+MAIL_USE_TLS=true
+MAIL_USERNAME='mamamajona@gmail.com'
+MAIL_PASSWORD='vuuepxvvuqymcbtv'
+
+```

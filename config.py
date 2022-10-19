@@ -8,7 +8,12 @@ class BaseConfig:
     JWT_SECRET_KEY = getenv('JWT_SECRET')
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=1)
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=2)
-
+    MAIL_SERVER = getenv('MAIL_SERVER')
+    MAIL_PORT = getenv('MAIL_PORT')
+    MAIL_USE_TLS = bool(getenv('MAIL_USE_TLS'))
+    MAIL_USERNAME = getenv('MAIL_USERNAME')
+    MAIL_PASSWORD = getenv('MAIL_PASSWORD')
+    print(MAIL_PASSWORD)
 
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
