@@ -3,7 +3,7 @@ from flask import request
 from flask_restx import Resource
 from app.schemas.roles_schema import RolesRequestSchema
 from app.controllers.roles_controller import RolesController
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, current_user
 
 namespace = api.namespace(
     name='Roles',
@@ -13,17 +13,18 @@ namespace = api.namespace(
 
 request_schema = RolesRequestSchema(namespace)
 
-@namespace.doc(security='Bearer')
-@namespace.route('/')
-class Roles(Resource):
 
-    # @jwt_required()
+@namespace.route('/')
+@namespace.doc(security='Bearer')
+class Roles(Resource):
+    @jwt_required()
     def get(self):
         '''Roles List'''
+        print(current_user)
         controller = RolesController()
         return controller.all()
 
-    # @jwt_required()
+    @jwt_required()
     @api.expect(request_schema.create(), validate=True)
     def post(self):
         ''' Roles Creation'''

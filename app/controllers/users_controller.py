@@ -20,7 +20,6 @@ class UsersController:
         return
 
 
-
     def all(self, per_page, page):
         try:
             records = self.model.where(status=True).order_by('id').paginate(

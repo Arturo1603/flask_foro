@@ -4,6 +4,9 @@ from flask_jwt_extended import create_access_token, create_refresh_token
 from secrets import token_hex
 from app.utils.mailing import Mailing
 
+
+
+
 class AuthController:
     def __init__(self):
         self.model = UserModel

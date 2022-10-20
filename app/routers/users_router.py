@@ -15,7 +15,6 @@ request_schema = UserRequestSchema(namespace)
 
 @namespace.route('/')
 class Users(Resource):
-
     @namespace.expect(request_schema.all())
     def get(self):
         '''User list'''
