@@ -23,7 +23,6 @@ class UserModel(BaseModel):
     rol_id = Column(Integer, ForeignKey('roles.id'), default=1)
     role = relationship('RolModel', uselist=False, back_populates='users')
 
-
     def hashPassword(self):
         pwd_encode = self.password.encode('utf-8')
         pwd_hash = hashpw(pwd_encode, gensalt(rounds=10))

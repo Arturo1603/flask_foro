@@ -1,4 +1,5 @@
-from app import jwt
+from app import jwt, socketio
+from flask_socketio import send
 from app.models import users_model
 from app.schemas.users_schema import UserResponseSchema
 
@@ -16,3 +17,7 @@ def user_lookup_callback(header, data):
     response = UserResponseSchema(many=False)
     return response.dump(record) or None
 
+@socketio.on('message')
+def handleMessage(msg):
+	print('Message: ' + msg)
+	send(msg, broadcast=True)

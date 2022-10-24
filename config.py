@@ -13,6 +13,7 @@ class BaseConfig:
     MAIL_USE_TLS = bool(getenv('MAIL_USE_TLS'))
     MAIL_USERNAME = getenv('MAIL_USERNAME')
     MAIL_PASSWORD = getenv('MAIL_PASSWORD')
+    SECRET_KEY_SOCKET = getenv('SECRET_KEY')
     print(MAIL_PASSWORD)
 
 class DevelopmentConfig(BaseConfig):
