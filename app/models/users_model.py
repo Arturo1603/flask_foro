@@ -20,7 +20,7 @@ class UserModel(BaseModel):
 
     status = Column(Boolean, default=True)
 
-    rol_id = Column(Integer, ForeignKey('roles.id'), default=1)
+    rol_id = Column(Integer, ForeignKey('roles.id'), default=7)
     role = relationship('RolModel', uselist=False, back_populates='users')
 
 

@@ -12,9 +12,14 @@ class WebScrapController:
             soup = BeautifulSoup(page.content, 'html.parser')
 
             data = soup.find_all('img', class_='first-image')
+
+            for info in data:
+                print(info.get('src'))
             
 
-            print(data) 
+            return {
+                'message': 'OK'
+            }
 
         except Exception as e:
             return {
