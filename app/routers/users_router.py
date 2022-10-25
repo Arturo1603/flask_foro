@@ -25,8 +25,10 @@ class Users(Resource):
     @api.expect(request_schema.create(), validate=True)
     def post(self):
         '''User Created'''
+        form = request_schema.create().parse_args()
+        print(form)
         controller = UsersController()
-        return controller.create(request.json)
+        return controller.create(form)
 
 
 @namespace.route('/<int:id>')
@@ -39,8 +41,9 @@ class UsersbydID(Resource):
     @api.expect(request_schema.update(), validate=True)
     def put(self, id):
         '''User Update'''
+        form = request_schema.update().parse_args()
         controller = UsersController()
-        return controller.update(id, request.json)
+        return controller.update(id, form)
 
     def delete(self, id):
         '''User delete'''

@@ -1,19 +1,16 @@
 from app import db
-from app.models.users_model import UserModel
-from app.schemas.users_schema import UserResponseSchema
+from app.models.publication_model import PublicationModel
+from app.schemas.publication_schema import PublicationResponseSchema
 from app.utils.bucket import Bucket
+from flask_jwt_extended import current_user
 
-
-class UsersController:
+class PublicationController:
     def __init__(self):
-        self.model = UserModel
-        self.response = UserResponseSchema
-
+        self.model = PublicationModel
+        self.response = PublicationResponseSchema
+        self.user_id = current_user['id']
         self.__allowed_extesions = ['jpg', 'png', 'jpeg', 'webp']
-        self.bucket = Bucket('imageuser-foro-flask', 'users')
-
-    def search(self, id):
-        return self.model.where(id=id).first()
+        self.bucket = Bucket('publicationforo', 'publications')
 
     def changeInDB(self, record=None):
         if record:
@@ -25,11 +22,10 @@ class UsersController:
 
     def all(self, per_page, page):
         try:
-            records = self.model.where(status=True).order_by('id').paginate(
-                per_page=per_page, page=page
-            )
+            records = self.model.where(status=True, user_id=self.user_id).order_by('id').paginate(
+                per_page=per_page, page=page)
             return {
-                'message': 'listado de roles',
+                'message': 'listado de publicaciones',
                 'data': self.response(many=True).dump(records.items),
                 'pagination': {
                     'totalRecords': records.total,
@@ -38,7 +34,6 @@ class UsersController:
                     'CurrentPage': records.page,
                 }
             }, 200
-
         except Exception as e:
             return {
                 "message": "Ocurrio algo",
@@ -46,7 +41,6 @@ class UsersController:
             }, 500
 
     def create(self, data):
-        print(data['image_url'].__dict__)
         try:
             #  usamos el metodo create y le mandamos la data, puede ser data['name] o
             # mas practico mandar la data como **data, asi le mandas independientemente com un sprind operator
@@ -57,11 +51,11 @@ class UsersController:
             image_url = self.bucket.uploadObject(stream, filename)
             data['image_url'] = image_url
 
+            data['user_id'] = self.user_id
             record = self.model.create(**data)
-            record.hashPassword()
             self.changeInDB(record)
             return {
-                'message': 'User created susccesfully',
+                'message': 'Publication created susccesfully',
                 # dump serializa la data de json a string
                 # # false porque devolvemos un objeto
                 'data': self.response(many=False).dump(record)
@@ -75,12 +69,12 @@ class UsersController:
 
     def getById(self, id):
         try:
-            if record := self.search(id):
+            if record := self.model.where(user_id=self.user_id, id=id).first():
                 return {
                     'data': self.response(many=False).dump(record)
                 }, 200
             return {
-                'message': 'Not found User'
+                'message': 'Not found Publication'
             }, 404
         except Exception as e:
             return {
@@ -90,7 +84,7 @@ class UsersController:
 
     def update(self, id, data):
         try:
-            if record := self.search(id):
+            if record := self.model.where(user_id=self.user_id, id=id).first():
                 if data['image_url']:
                     filename, stream = self.__validateExpresions(
                         data['image_url'])
@@ -102,7 +96,7 @@ class UsersController:
 
                 return self.response(many=False).dump(record), 200
             return {
-                'message': 'Not Found Rol'
+                'message': 'Not Found Publication'
             }, 404
         except Exception as e:
             self.changeInDB()
@@ -113,12 +107,12 @@ class UsersController:
 
     def delete(self, id):
         try:
-            if record := self.search(id):
+            if record := self.model.where(user_id=self.user_id, id=id).first():
                 if record.status:
                     record.update(status=False)
                     self.changeInDB(record)
                 return {
-                    'message': f'User deshabilited with id: {id}'
+                    'message': f'Publication deshabilited with id: {id}'
                 }, 200
             return {
                 'message': 'Not Found Role'

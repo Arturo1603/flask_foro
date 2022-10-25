@@ -20,8 +20,11 @@ class UserModel(BaseModel):
 
     status = Column(Boolean, default=True)
 
-    rol_id = Column(Integer, ForeignKey('roles.id'), default=1)
+    rol_id = Column(Integer, ForeignKey('roles.id'), default=7)
     role = relationship('RolModel', uselist=False, back_populates='users')
+    publication = relationship('PublicationModel', uselist=True, back_populates='users')
+    commentary_user =  relationship('CommentaryModel', uselist=True, back_populates='users_commentary')
+    replycomment_user  = relationship('ReplyCommentModel', uselist=True, back_populates='users_replycomment')
 
     def hashPassword(self):
         pwd_encode = self.password.encode('utf-8')
