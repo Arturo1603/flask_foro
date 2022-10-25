@@ -1,7 +1,7 @@
 from app import api
 from flask_restx import Resource
 from app.schemas.replycomment_schema import ReplyCommentRequestSchema
-from app.controllers.commentary_controller import CommentaryController
+from app.controllers.replycomment_controller import ReplyCommentController
 from flask_jwt_extended import jwt_required
 
 namespace = api.namespace(
@@ -31,7 +31,7 @@ class ReplyCommentary(Resource):
         '''Reply Commentary Created'''
         form = request_schema.create().parse_args()
         print(form)
-        controller = CommentaryController()
+        controller = ReplyCommentController()
         return controller.create(form)
 
 
@@ -41,7 +41,7 @@ class ReplyCommentarybydID(Resource):
     @jwt_required()
     def get(self, id):
         '''Reply Commentary By ID'''
-        controller = CommentaryController()
+        controller = ReplyCommentController()
         return controller.getById(id)
 
     @jwt_required()
@@ -49,13 +49,13 @@ class ReplyCommentarybydID(Resource):
     def put(self, id):
         '''Reply Commentary Update'''
         form = request_schema.update().parse_args()
-        controller = CommentaryController()
+        controller = ReplyCommentController()
         return controller.update(id, form)
 
     @jwt_required()
     def delete(self, id):
         '''Reply Commentary delete'''
-        controller = CommentaryController()
+        controller = ReplyCommentController()
         return controller.delete(id)
 
 

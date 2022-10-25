@@ -24,8 +24,7 @@ class ReplyCommentRequestSchema:
                             required=True,  location='form')
         parser.add_argument('image_url', type=FileStorage,
                             required=True,  location='files')
-        parser.add_argument('commentary_id', type=int,
-                            required=True, location='form')
+        parser.add_argument('commentary_id', type=int, required=True, location='form')
         return parser
 
     def update(self):

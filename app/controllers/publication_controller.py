@@ -10,7 +10,7 @@ class PublicationController:
         self.response = PublicationResponseSchema
         self.user_id = current_user['id']
         self.__allowed_extesions = ['jpg', 'png', 'jpeg', 'webp']
-        self.bucket = Bucket('imageuser-foro-flask', 'publications')
+        self.bucket = Bucket('publicationforo', 'publications')
 
     def changeInDB(self, record=None):
         if record:
