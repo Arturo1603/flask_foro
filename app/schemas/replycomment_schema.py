@@ -21,7 +21,7 @@ class ReplyCommentRequestSchema:
         parser.add_argument('message', type=str, required=True,  location='form')
         parser.add_argument('image_url', type=FileStorage,
                             required=True,  location='files')
-        parser.add_argument('publication_id', type=str, required=True, location='form')
+        parser.add_argument('commentary_id', type=int, required=True, location='form')
         return parser
 
 
@@ -39,4 +39,4 @@ class ReplyCommentResponseSchema(SQLAlchemyAutoSchema):
         model = ReplyCommentModel
         ordered = True
 
-    users = Nested('UserResponseSchema', exclude=['publication'], many=False)
+    users = Nested('UserResponseSchema', exclude=['commentary'], many=False)
