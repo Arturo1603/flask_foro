@@ -71,3 +71,5 @@ class UserResponseSchema(SQLAlchemyAutoSchema):
 
     role = Nested('RolesResponseSchema', exclude=['users'], many=False)
     publication = Nested('PublicationResponseSchema', exclude=['users'],  many=True)
+    commentary = Nested('CommentaryResponseSchema', exclude=['users'], many=True)
+    reply_comment = Nested('ReplyCommentResponseSchema', exclude=['users'], many=True)

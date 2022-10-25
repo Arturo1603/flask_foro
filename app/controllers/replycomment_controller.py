@@ -1,6 +1,6 @@
 from app import db
 from app.models.replycomment_model import ReplyCommentModel
-from app.schemas.replycomment_schema import replycomment_schema
+from app.schemas.replycomment_schema import ReplyCommentResponseSchema  
 from app.utils.bucket import Bucket
 from flask_jwt_extended import current_user
 
@@ -8,7 +8,7 @@ from flask_jwt_extended import current_user
 class ReplyCommentController:
     def __init__(self):
         self.model = ReplyCommentModel
-        self.response = replycomment_schema
+        self.response = ReplyCommentResponseSchema
         self.user_id = current_user['id']
         self.__allowed_extesions = ['jpg', 'png', 'jpeg', 'webp']
         self.bucket = Bucket('imageuser-foro-flask', 'publications')
