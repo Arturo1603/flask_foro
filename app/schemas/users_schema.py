@@ -70,3 +70,4 @@ class UserResponseSchema(SQLAlchemyAutoSchema):
         exclude = ['password']
 
     role = Nested('RolesResponseSchema', exclude=['users'], many=False)
+    publication = Nested('PublicationResponseSchema', exclude=['users'],  many=True)

@@ -6,6 +6,9 @@ from flask_migrate import Migrate
 from config import config_env
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
+from flask_socketio import SocketIO
+
+
 
 app = Flask(__name__)
 app.config.from_object(config_env[getenv('FLASK_ENV')])
@@ -32,3 +35,4 @@ migrate = Migrate(app, db)
 
 jwt = JWTManager(app)
 mail = Mail(app)
+socketio = SocketIO(app, cors_allowed_origins='*')
