@@ -20,7 +20,6 @@ class Roles(Resource):
     # @jwt_required()
     def get(self):
         '''Roles List'''
-        print(current_user)
         controller = RolesController()
         return controller.all()
 
