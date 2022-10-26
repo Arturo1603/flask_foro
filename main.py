@@ -1,4 +1,3 @@
-
 from app import app, db
 from app.helpers import jwt
 # importamos las rutas
