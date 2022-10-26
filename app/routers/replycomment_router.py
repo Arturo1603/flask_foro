@@ -1,7 +1,7 @@
 from app import api
 from flask_restx import Resource
 from app.schemas.replycomment_schema import ReplyCommentRequestSchema
-from app.controllers.commentary_controller import CommentaryController
+from app.controllers.replycomment_controller import ReplyCommentController
 from flask_jwt_extended import jwt_required
 
 namespace = api.namespace(
