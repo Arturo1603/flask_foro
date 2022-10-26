@@ -4,7 +4,6 @@ from app.models.publication_model import PublicationModel
 from flask_restx.reqparse import RequestParser
 from werkzeug.datastructures import FileStorage
 
-
 class PublicationRequestSchema:
     def __init__(self, namespace):
         self.namespace = namespace
@@ -19,6 +18,7 @@ class PublicationRequestSchema:
 
         parser = RequestParser()
         parser.add_argument('description', type=str, required=True,  location='form')
+        parser.add_argument('title', type=str, required=True,  location='form')
         parser.add_argument('image_url', type=FileStorage,
                             required=True,  location='files')
         return parser
@@ -27,6 +27,7 @@ class PublicationRequestSchema:
     def update(self):
         parser = RequestParser()
         parser.add_argument('description', type=str, required=False,  location='form')
+        parser.add_argument('title', type=str, required=False,  location='form')
         parser.add_argument('image_url', type=FileStorage,
                             required=False,  location='files') 
 
