@@ -1,4 +1,3 @@
-from tkinter import NE
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from marshmallow.fields import Nested
 from app.models.replycomment_model import ReplyCommentModel
