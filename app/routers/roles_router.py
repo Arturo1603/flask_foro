@@ -3,7 +3,7 @@ from flask import request
 from flask_restx import Resource
 from app.schemas.roles_schema import RolesRequestSchema
 from app.controllers.roles_controller import RolesController
-from flask_jwt_extended import jwt_required, current_user
+from flask_jwt_extended import jwt_required
 
 namespace = api.namespace(
     name='Roles',
