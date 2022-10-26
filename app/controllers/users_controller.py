@@ -10,7 +10,7 @@ class UsersController:
         self.response = UserResponseSchema
 
         self.__allowed_extesions = ['jpg', 'png', 'jpeg', 'webp']
-        self.bucket = Bucket('imageuser-foro-flask', 'users')
+        self.bucket = Bucket('publicationforo', 'users')
 
     def search(self, id):
         return self.model.where(id=id).first()
