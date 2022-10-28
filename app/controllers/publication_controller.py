@@ -67,9 +67,10 @@ class PublicationController:
             # record = self.model.create(**data)
             # record.hashPassword()
             # self.changeInDB(record)
-            filename, stream = self.__validateExpresions(data['image_url'])
-            image_url = self.bucket.uploadObject(stream, filename)
-            data['image_url'] = image_url
+            if data['image_url'] !=  None:
+                filename, stream = self.__validateExpresions(data['image_url'])
+                image_url = self.bucket.uploadObject(stream, filename)
+                data['image_url'] = image_url
 
             data['user_id'] = self.user_id
             record = self.model.create(**data)
@@ -78,8 +79,7 @@ class PublicationController:
                 'message': 'Publication created susccesfully',
                 # dump serializa la data de json a string
                 # # false porque devolvemos un objeto
-                'data': self.response(many=False).dump(record)
-            }, 201
+                'data': self.response(many=False).dump(record)},201
         except Exception as e:
             self.changeInDB()
             return {

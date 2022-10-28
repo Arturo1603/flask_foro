@@ -22,10 +22,10 @@ class DevelopmentConfig(BaseConfig):
 
 class ProductionConfig(BaseConfig):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = getenv('DATABASE_URL').replace(
-        'postgres', 'postgresql', 1
-    )
-    PROPAGATE_EXCEPTIONS = True
+    # SQLALCHEMY_DATABASE_URI = getenv('DATABASE_URL').replace(
+    #     'postgres', 'postgresql', 1
+    # )
+    # PROPAGATE_EXCEPTIONS = True
 
 
 config_env = {
