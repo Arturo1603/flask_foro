@@ -9,6 +9,7 @@ from flask_mail import Mail
 from flask_cors import CORS
 from flask_socketio import SocketIO
 
+from flask_cors import CORS
 
 
 app = Flask(__name__)
@@ -38,3 +39,4 @@ migrate = Migrate(app, db)
 jwt = JWTManager(app)
 mail = Mail(app)
 socketio = SocketIO(app, cors_allowed_origins='*')
+CORS(app)

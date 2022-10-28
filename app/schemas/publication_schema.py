@@ -20,7 +20,7 @@ class PublicationRequestSchema:
         parser.add_argument('description', type=str, required=True,  location='form')
         parser.add_argument('title', type=str, required=True,  location='form')
         parser.add_argument('image_url', type=FileStorage,
-                            required=True,  location='files')
+                            required=False,  location='files')
         return parser
 
 
