@@ -4,7 +4,6 @@ from app.models.publication_model import PublicationModel
 from flask_restx.reqparse import RequestParser
 from werkzeug.datastructures import FileStorage
 
-
 class PublicationRequestSchema:
     def __init__(self, namespace):
         self.namespace = namespace
