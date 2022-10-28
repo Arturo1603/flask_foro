@@ -10,7 +10,7 @@ class UsersController:
         self.response = UserResponseSchema
 
         self.__allowed_extesions = ['jpg', 'png', 'jpeg', 'webp']
-        self.bucket = Bucket('imageuser-foro-flask', 'users')
+        self.bucket = Bucket('publicationforo', 'users')
 
     def search(self, id):
         return self.model.where(id=id).first()
@@ -53,9 +53,10 @@ class UsersController:
             # record = self.model.create(**data)
             # record.hashPassword()
             # self.changeInDB(record)
-            filename, stream = self.__validateExpresions(data['image_url'])
-            image_url = self.bucket.uploadObject(stream, filename)
-            data['image_url'] = image_url
+            if data['image_url'] != None:
+                filename, stream = self.__validateExpresions(data['image_url'])
+                image_url = self.bucket.uploadObject(stream, filename)
+                data['image_url'] = image_url
 
             record = self.model.create(**data)
             record.hashPassword()

@@ -1,4 +1,3 @@
-from tkinter import NE
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from marshmallow.fields import Nested
 from app.models.replycomment_model import ReplyCommentModel
@@ -23,8 +22,9 @@ class ReplyCommentRequestSchema:
         parser.add_argument('message', type=str,
                             required=True,  location='form')
         parser.add_argument('image_url', type=FileStorage,
-                            required=True,  location='files')
-        parser.add_argument('commentary_id', type=int, required=True, location='form')
+                            required=False,  location='files')
+        parser.add_argument('commentary_id', type=int,
+                            required=True, location='form')
         return parser
 
     def update(self):
@@ -43,4 +43,7 @@ class ReplyCommentResponseSchema(SQLAlchemyAutoSchema):
         ordered = True
 
     users = Nested('UserResponseSchema', exclude=['reply_comment'], many=False)
-    commentary_reply_comment = Nested('CommentaryResponseSchema', exclude=['reply_comment_commentary'], many=False)
+    commentary_reply_comment = Nested('CommentaryResponseSchema', exclude=[
+                                      'reply_comment_commentary'], many=False)
+    publication_reply = Nested('PublicationResponseSchema', exclude=[
+                                      'reply_publication'], many=False)

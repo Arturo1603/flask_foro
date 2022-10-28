@@ -7,6 +7,7 @@ class PublicationModel(BaseModel):
     __tablename__ = 'publication'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
+    title = Column(String(120))
     description = Column(String(120))
     image_url = Column(String(128))
     status = Column(Boolean, default=True)

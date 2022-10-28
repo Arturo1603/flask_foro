@@ -13,22 +13,27 @@ class PublicationRequestSchema:
         parser = RequestParser()
         parser.add_argument('per_page', type=int, default=1, location='args')
         parser.add_argument('page', type=int, default=1, location='args')
-        
+
         return parser
+
     def create(self):
 
         parser = RequestParser()
-        parser.add_argument('description', type=str, required=True,  location='form')
+        parser.add_argument('description', type=str,
+                            required=True,  location='form')
+        parser.add_argument('title', type=str, required=True,  location='form')
         parser.add_argument('image_url', type=FileStorage,
-                            required=True,  location='files')
+                            required=False,  location='files')
         return parser
-
 
     def update(self):
         parser = RequestParser()
-        parser.add_argument('description', type=str, required=False,  location='form')
+        parser.add_argument('description', type=str,
+                            required=False,  location='form')
+        parser.add_argument('title', type=str,
+                            required=False,  location='form')
         parser.add_argument('image_url', type=FileStorage,
-                            required=False,  location='files') 
+                            required=False,  location='files')
 
         return parser
 
@@ -39,3 +44,7 @@ class PublicationResponseSchema(SQLAlchemyAutoSchema):
         ordered = True
 
     users = Nested('UserResponseSchema', exclude=['publication'], many=False)
+    commentary_publication = Nested('CommentaryResponseSchema', exclude=[
+                                    'publication_commentary'], many=True)
+    reply_publication = Nested('ReplyCommentResponseSchema', exclude=[
+                               'publication_reply'], many=True)

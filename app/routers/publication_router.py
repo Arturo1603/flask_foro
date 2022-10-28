@@ -18,12 +18,13 @@ request_schema = PublicationRequestSchema(namespace)
 @namespace.doc(security='Bearer')
 class Pubication(Resource):
     @jwt_required()
-    @namespace.expect(request_schema.all())
+    # @namespace.expect(request_schema.all())
     def get(self):
         '''Publication list total'''
-        query_params =  request_schema.all().parse_args()
+        # query_params =  request_schema.all().parse_args()
         controller = PublicationController()
-        return controller.allall( query_params['per_page'], query_params['page'])
+        # return controller.allall( query_params['per_page'], query_params['page'])
+        return controller.allall()
 
 
 @namespace.route('/')

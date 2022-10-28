@@ -6,11 +6,14 @@ from flask_migrate import Migrate
 from config import config_env
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
+from flask_cors import CORS
 from flask_socketio import SocketIO
 
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+CORS(app)
 app.config.from_object(config_env[getenv('FLASK_ENV')])
 
 authorizations = {
@@ -36,3 +39,4 @@ migrate = Migrate(app, db)
 jwt = JWTManager(app)
 mail = Mail(app)
 socketio = SocketIO(app, cors_allowed_origins='*')
+CORS(app)

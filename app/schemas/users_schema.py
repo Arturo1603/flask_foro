@@ -32,7 +32,7 @@ class UserRequestSchema:
         parser.add_argument('last_name', type=str,
                             required=True,  location='form')
         parser.add_argument('image_url', type=FileStorage,
-                            required=True,  location='files')
+                            required=False,  location='files')
         parser.add_argument('email', type=str, required=True,  location='form')
 
         parser.add_argument('username', type=str,
