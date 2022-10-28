@@ -20,19 +20,18 @@ class PublicationController:
         db.session.rollback()
         return
 
-    def allall(self, per_page, page):
+    def allall(self):
         try:
-            records = self.model.where(status=True).order_by('id').paginate(
-                per_page=per_page, page=page)
+            records = self.model.where(status=True).order_by('id').all()
             return {
                 'message': 'listado de publicaciones',
-                'data': self.response(many=True).dump(records.items),
-                'pagination': {
-                    'totalRecords': records.total,
-                    'perPage': records.per_page,
-                    'TotalPages': records.pages,
-                    'CurrentPage': records.page,
-                }
+                'data': self.response(many=True).dump(records),
+                # 'pagination': {
+                #     'totalRecords': records.total,
+                #     'perPage': records.per_page,
+                #     'TotalPages': records.pages,
+                #     'CurrentPage': records.page,
+                # }
             }, 200
         except Exception as e:
             return {
