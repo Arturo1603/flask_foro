@@ -46,14 +46,14 @@ class UsersController:
             }, 500
 
     def create(self, data):
-        print(data['image_url'].__dict__)
+        # print(data['image_url'].__dict__)
         try:
             #  usamos el metodo create y le mandamos la data, puede ser data['name] o
             # mas practico mandar la data como **data, asi le mandas independientemente com un sprind operator
             # record = self.model.create(**data)
             # record.hashPassword()
             # self.changeInDB(record)
-            if data['image_url'] != None:
+            if data['image_url'] !=  None:
                 filename, stream = self.__validateExpresions(data['image_url'])
                 image_url = self.bucket.uploadObject(stream, filename)
                 data['image_url'] = image_url
