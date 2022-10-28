@@ -17,13 +17,11 @@ request_schema = ReplyCommentRequestSchema(namespace)
 @namespace.route('/')
 @namespace.doc(security='Bearer')
 class ReplyCommentary(Resource):
-    # @jwt_required()
-    # @namespace.expect(request_schema.all())
-    # def get(self):
-    #     '''Publication list'''
-    #     query_params =  request_schema.all().parse_args()
-    #     controller = CommentaryController()
-    #     return controller.all( query_params['per_page'], query_params['page'])
+    @jwt_required()
+    def get(self):
+        '''Response comment list'''
+        controller = ReplyCommentController()
+        return controller.all()
 
     @jwt_required()
     @api.expect(request_schema.create(), validate=True)

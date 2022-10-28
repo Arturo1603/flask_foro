@@ -45,5 +45,5 @@ class ReplyCommentResponseSchema(SQLAlchemyAutoSchema):
     users = Nested('UserResponseSchema', exclude=['reply_comment'], many=False)
     commentary_reply_comment = Nested('CommentaryResponseSchema', exclude=[
                                       'reply_comment_commentary'], many=False)
-    publication_reply = Nested('PublicationResponseSchema', exclude=[
-                                      'reply_publication'], many=False)
+    # publication_reply = Nested('PublicationResponseSchema', exclude=[
+    #                                   'reply_publication'], many=False)

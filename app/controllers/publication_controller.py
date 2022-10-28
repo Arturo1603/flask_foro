@@ -39,6 +39,7 @@ class PublicationController:
                 'error': str(e),
             }, 500
 
+    
 
     def all(self, per_page, page):
         try:

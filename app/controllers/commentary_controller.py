@@ -23,25 +23,18 @@ class CommentaryController:
         db.session.rollback()
         return
 
-    # def all(self, per_page, page):
-    #     try:
-    #         records = self.model.where(status=True, publication_id=).order_by('id').paginate(
-    #             per_page=per_page, page=page)
-    #         return {
-    #             'message': 'listado de publicaciones',
-    #             'data': self.response(many=True).dump(records.items),
-    #             'pagination': {
-    #                 'totalRecords': records.total,
-    #                 'perPage': records.per_page,
-    #                 'TotalPages': records.pages,
-    #                 'CurrentPage': records.page,
-    #             }
-    #         }, 200
-    #     except Exception as e:
-    #         return {
-    #             "message": "Ocurrio algo",
-    #             'error': str(e),
-    #         }, 500
+    def all(self):
+        try:
+            records = self.model.where(status=True).order_by('id').all()
+            return {
+                'message': 'listado de comentarios',
+                'data': self.response(many=True).dump(records),
+            }, 200
+        except Exception as e:
+            return {
+                "message": "Ocurrio algo",
+                'error': str(e),
+            }, 500
 
     def create(self, data):
         try:
