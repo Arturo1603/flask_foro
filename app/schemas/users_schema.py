@@ -59,7 +59,6 @@ class UserRequestSchema:
                             required=False,  location='form')
         # parser.add_argument('password', type=str,
         #                     required=False,  location='form')
-
         return parser
 
 
@@ -71,5 +70,5 @@ class UserResponseSchema(SQLAlchemyAutoSchema):
 
     role = Nested('RolesResponseSchema', exclude=['users'], many=False)
     publication = Nested('PublicationResponseSchema', exclude=['users'],  many=True)
-    commentary = Nested('CommentaryResponseSchema', exclude=['users'], many=True)
+    # commentary_user = Nested('CommentaryResponseSchema', exclude=['users_commentary'], many=True)
     reply_comment = Nested('ReplyCommentResponseSchema', exclude=['users'], many=True)

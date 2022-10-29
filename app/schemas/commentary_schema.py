@@ -42,7 +42,7 @@ class CommentaryResponseSchema(SQLAlchemyAutoSchema):
         model = CommentaryModel
         ordered = True
 
-    users = Nested('UserResponseSchema', exclude=['commentary'], many=False)
+    # users_commentary = Nested('UserResponseSchema', exclude=['commentary_user'], many=False)
     reply_comment = Nested('ReplyCommentResponseSchema', exclude=['replycomment_commentary'] ,many=True)
     publication_commentary = Nested("PublicationResponseSchema", exclude=[
                                     'commentary_publication'], many=False)
