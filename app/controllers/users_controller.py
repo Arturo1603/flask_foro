@@ -46,7 +46,7 @@ class UsersController:
             }, 500
 
     def create(self, data):
-        # print(data['image_url'].__dict__)
+
         try:
             #  usamos el metodo create y le mandamos la data, puede ser data['name] o
             # mas practico mandar la data como **data, asi le mandas independientemente com un sprind operator

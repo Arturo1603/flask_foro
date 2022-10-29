@@ -21,7 +21,6 @@ class SignIn(Resource):
     def post(self):
         '''Token Create'''
         controller = AuthController()
-        print(request.json)
         return controller.signIn(request.json)
 
 # reset passsword

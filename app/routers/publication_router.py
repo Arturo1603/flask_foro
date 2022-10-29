@@ -43,7 +43,6 @@ class PubicationUser(Resource):
     def post(self):
         '''Publication Created'''
         form = request_schema.create().parse_args()
-        print(form)
         controller = PublicationController()
         return controller.create(form)
 

@@ -28,7 +28,6 @@ class ReplyCommentary(Resource):
     def post(self):
         '''Reply Commentary Created'''
         form = request_schema.create().parse_args()
-        print(form)
         controller = ReplyCommentController()
         return controller.create(form)
 

@@ -26,7 +26,6 @@ class Users(Resource):
     def post(self):
         '''User Created'''
         form = request_schema.create().parse_args()
-        print(form)
         controller = UsersController()
         return controller.create(form)
 

@@ -14,7 +14,7 @@ class WebScrapController:
             data = soup.find_all('img', class_='first-image')
 
             for info in data:
-                print(info.get('src'))
+
             
 
             return {

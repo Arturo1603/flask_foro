@@ -28,7 +28,7 @@ class Commentary(Resource):
     def post(self):
         '''Commentary Created'''
         form = request_schema.create().parse_args()
-        print(form)
+
         controller = CommentaryController()
         return controller.create(form)
 
