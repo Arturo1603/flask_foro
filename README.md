@@ -21,4 +21,7 @@ MAIL_USE_TLS=true
 MAIL_USERNAME='mamamajona@gmail.com'
 MAIL_PASSWORD='vuuepxvvuqymcbtv'
 
+AWS_ACCESS_KEY_ID=''
+AWS_SECRET_ACCESS_KEY=''
+AWS_REGION=''
 ```
